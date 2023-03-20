@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 public class SignInTests {
@@ -113,7 +114,7 @@ public class SignInTests {
 
 
 	//Signing in with correct email and wrong password
-		@Test(priority=3)
+		@Test(priority=3 )
 		public void LoginTest3() {
 			System.out.println("Starting Login Test");
 			
@@ -197,8 +198,8 @@ public class SignInTests {
 						sleep(1000);
 						
 						//enter captcha
-						WebElement captcha = driver.findElement(By.id("captcha_user_forgotpassword"));
-						captcha.sendKeys("     ");
+					//	WebElement captcha = driver.findElement(By.id("captcha_user_forgotpassword"));
+					//	captcha.sendKeys("     ");
 						sleep(10000);
 						
 						//click on reset my password button
@@ -221,11 +222,13 @@ public class SignInTests {
 										+ "\nExpected Message: " + expectedMessage);
 						sleep(1000);
 						
-						driver.quit();
-						
 			}	
 		
-	
+			@AfterMethod(alwaysRun = true)
+			private void tearDown() {
+				// Close browser
+				driver.quit();
+			}
 	
 	private void sleep(long m) {
 		try {
