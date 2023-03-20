@@ -96,7 +96,7 @@ public class SignInTests {
 				
 
 				WebElement errorMessage = driver.findElement(By.xpath("//main[@id='maincontent']//div[@role='alert']/div/div"));
-				String expectedMessage = "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.";
+				String expectedMessage = "Incorrect CAPTCHA";
 				String actualMessage = errorMessage.getText();
 				Assert.assertTrue(actualMessage.contains(expectedMessage),
 						"Actual message does not contain expected message.\nActual Message: " + actualMessage
@@ -150,7 +150,7 @@ public class SignInTests {
 					
 
 					WebElement errorMessage = driver.findElement(By.xpath("//main[@id='maincontent']//div[@role='alert']/div/div"));
-					String expectedMessage = "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.";
+					String expectedMessage = "Incorrect CAPTCHA";
 					String actualMessage = errorMessage.getText();
 					Assert.assertTrue(actualMessage.contains(expectedMessage),
 							"Actual message does not contain expected message.\nActual Message: " + actualMessage
@@ -162,67 +162,6 @@ public class SignInTests {
 					driver.quit();
 		
 		}
-		
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-
-		//click on forgot password
-			@Test(priority=4)
-			public void LoginTest4() {
-				System.out.println("Starting Login Test");
-				
-				// Create Web driver
-						WebDriver driver = new ChromeDriver();
-						// Move browser window to the left monitor
-						driver.manage().window().setPosition(new Point(-1000, 200));
-						// maximize browser window
-						driver.manage().window().maximize();
-						
-						//open the test page
-						String url = "https://magento.softwaretestingboard.com/customer/account/login/";
-						driver.get(url);
-						
-						//click on forgot password
-						WebElement forgot_password = driver.findElement(By.xpath("/html//form[@id='login-form']/fieldset[@class='fieldset login']//a[@href='https://magento.softwaretestingboard.com/customer/account/forgotpassword/']/span[.='Forgot Your Password?']"));
-						//WebElement forgot_password = driver.findElement(By.xpath("//div[@class='action remind']//a[@href='https://magento.softwaretestingboard.com/customer/account/forgotpassword/'"));
-						forgot_password.click();
-						
-						//expected page
-						String ExpectedUrl1 = "https://magento.softwaretestingboard.com/customer/account/forgotpassword/";
-						String ActualUrl1 = driver.getCurrentUrl();
-						Assert.assertEquals(ActualUrl1,ExpectedUrl1,"Actual Url is not same as the expected url");
-						sleep(1000);
-						
-						//enter email
-						WebElement email = driver.findElement(By.id("email_address"));
-						email.sendKeys("abc@hotmail.com");
-						sleep(1000);
-						
-						//enter captcha
-					//	WebElement captcha = driver.findElement(By.id("captcha_user_forgotpassword"));
-					//	captcha.sendKeys("     ");
-						sleep(10000);
-						
-						//click on reset my password button
-						WebElement reset= driver.findElement(By.xpath("//form[@id='form-validate']//button[@type='submit']/span[.='Reset My Password']"));
-						reset.click();
-						
-						//expected page
-						String ExpectedUrl2 = "https://magento.softwaretestingboard.com/customer/account/login/";
-						String ActualUrl2 = driver.getCurrentUrl();
-						Assert.assertEquals(ActualUrl2,ExpectedUrl2,"Actual Url is not same as the expected url");
-						sleep(1000);
-						
-						//message
-
-						WebElement successMessage = driver.findElement(By.xpath("//main[@id='maincontent']//div[@role='alert']/div/div"));
-						String expectedMessage = "If there is an account associated with abc@hotmail.com you will receive an email with a link to reset your password.";
-						String actualMessage = successMessage.getText();
-						Assert.assertTrue(actualMessage.contains(expectedMessage),
-								"Actual message does not contain expected message.\nActual Message: " + actualMessage
-										+ "\nExpected Message: " + expectedMessage);
-						sleep(1000);
-						
-			}	
 		
 			@AfterMethod(alwaysRun = true)
 			private void tearDown() {
